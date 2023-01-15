@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"log"
 )
 
@@ -16,7 +17,9 @@ type Todo struct {
 func main() {
 	fmt.Println("Hello world")
 
-	app := fiber.New()
+	app := fiber.New(fiber.Config{})
+
+	app.Use(cors.New(cors.Config{}))
 
 	todos := []Todo{}
 	app.Get("/Todo", func(c *fiber.Ctx) error {
